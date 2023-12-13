@@ -9,7 +9,11 @@ namespace Restaraunt.RestarauntSystem.DAL.DbContexts.Config
     {
         public void Configure(EntityTypeBuilder<Portion> builder)
         {
-            throw new NotImplementedException();
+            builder
+                .HasMany(hm => hm.OrderDetails)
+                .WithOne(wo => wo.Portion)
+                .HasForeignKey(wo => wo.PortionId)
+                .IsRequired();
         }
     }
 }

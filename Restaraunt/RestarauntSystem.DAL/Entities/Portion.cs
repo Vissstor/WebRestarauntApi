@@ -6,7 +6,7 @@
         public long DishId { get; set; }
         public int Weight { get; set; }
         public decimal Price { get; set; }
-        public IEnumerable<OrderDetail> Portions { get; set; }
+        public IEnumerable<OrderDetail> OrderDetails { get; set; }
 
     }
 }

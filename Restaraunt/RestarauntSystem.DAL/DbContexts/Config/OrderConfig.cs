@@ -9,8 +9,9 @@ namespace Restaraunt.RestarauntSystem.DAL.DbContexts.Config
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder
-                .HasMany(pon=>pon.Portions)
-                .WithOne(nt=>nt.)
+                .HasMany(hm => hm.OrdersDetail)
+                .WithOne(wo => wo.Order)
+                .HasForeignKey(hf => hf.OrderId).IsRequired();
         }
     }
 }

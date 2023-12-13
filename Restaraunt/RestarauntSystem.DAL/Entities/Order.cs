@@ -5,6 +5,6 @@
         public DateTime DateOrder { get; set; }
         public int Status { get; set; }
         public int TableNumber { get; set; }
-        public IEnumerable<OrderDetail> Portions { get; set; }
+        public IEnumerable<OrderDetail> OrdersDetail { get; set; }
     }
 }

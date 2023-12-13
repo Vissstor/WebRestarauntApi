@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<RestarauntContex>(dbContextOptions => dbContextOptions.UseSqlite("Data Source=RestaurantService.db"));
+builder.Services.AddDbContext<RestarauntContext>(dbContextOptions => dbContextOptions.UseSqlServer("Server=.\\SQLEXPRESS;DataBase=WebRestaraunt.db;Trusted_Connection=True"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

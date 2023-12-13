@@ -9,9 +9,9 @@ namespace Restaraunt.RestarauntSystem.DAL.DbContexts.Config
         public void Configure(EntityTypeBuilder<Ingredient> builder)
         {
             builder
-                .HasMany(pon => pon.Dishes)
-                .WithMany(nt => nt.Ingredients)
-                .UsingEntity<IngredientDish>();
+                .HasMany(hm=> hm.IngredientDishes)
+                .WithOne(wm => wm.Ingredient)
+                .HasForeignKey(hf=>hf.IngredientId).IsRequired();
         }
     }
 }

@@ -11,12 +11,12 @@ namespace Restaraunt.RestarauntSystem.DAL.DbContexts.Config
             builder
                 .HasMany(h => h.Portions)
                 .WithOne(w => w.Dish)
-                .HasForeignKey(h => h.Id)
+                .HasForeignKey(h => h.DishId)
                 .IsRequired();
             builder
                 .HasMany(hm => hm.IngredientsDishes)
                 .WithOne(wo => wo.Dish)
-                .HasForeignKey(h => h.Id)
+                .HasForeignKey(h => h.DishId)
                 .IsRequired();
         }
     }

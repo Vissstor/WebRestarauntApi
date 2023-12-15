@@ -21,6 +21,7 @@ namespace Restaraunt.RestarauntSystem.DAL.DbContexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(typeof(DishConfig).Assembly);
+            builder.Seed<Ingredient>(ModelBuilderExtensions.GetIngredients());
             base.OnModelCreating(builder);
         }
 

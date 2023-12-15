@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaraunt.RestarauntSystem.DAL.DbContexts;
 
@@ -11,9 +12,10 @@ using Restaraunt.RestarauntSystem.DAL.DbContexts;
 namespace Restaraunt.Migrations
 {
     [DbContext(typeof(RestarauntContext))]
-    partial class RestarauntContexModelSnapshot : ModelSnapshot
+    [Migration("20231215121240_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,12 +73,6 @@ namespace Restaraunt.Migrations
                     b.Property<long>("IngredientId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
                     b.HasKey("DishId", "IngredientId");
 
                     b.HasIndex("IngredientId");
@@ -113,12 +109,6 @@ namespace Restaraunt.Migrations
 
                     b.Property<long>("PortionId")
                         .HasColumnType("bigint");
-
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.HasKey("OrderId", "PortionId");
 

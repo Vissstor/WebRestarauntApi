@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaraunt.RestarauntSystem.DAL.DbContexts;
 
@@ -11,9 +12,10 @@ using Restaraunt.RestarauntSystem.DAL.DbContexts;
 namespace Restaraunt.Migrations
 {
     [DbContext(typeof(RestarauntContext))]
-    partial class RestarauntContexModelSnapshot : ModelSnapshot
+    [Migration("20231215184544_Seed")]
+    partial class Seed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

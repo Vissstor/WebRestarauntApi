@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaraunt.RestarauntSystem.DAL.DbContexts;
 
@@ -11,9 +12,10 @@ using Restaraunt.RestarauntSystem.DAL.DbContexts;
 namespace Restaraunt.Migrations
 {
     [DbContext(typeof(RestarauntContext))]
-    partial class RestarauntContexModelSnapshot : ModelSnapshot
+    [Migration("20231215173319_321")]
+    partial class _321
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,11 +26,11 @@ namespace Restaraunt.Migrations
 
             modelBuilder.Entity("Restaraunt.RestarauntSystem.DAL.Entities.Dish", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -47,11 +49,11 @@ namespace Restaraunt.Migrations
 
             modelBuilder.Entity("Restaraunt.RestarauntSystem.DAL.Entities.Ingredient", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -65,17 +67,11 @@ namespace Restaraunt.Migrations
 
             modelBuilder.Entity("Restaraunt.RestarauntSystem.DAL.Entities.IngredientDish", b =>
                 {
-                    b.Property<long>("DishId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("DishId")
+                        .HasColumnType("int");
 
-                    b.Property<long>("IngredientId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    b.Property<int>("IngredientId")
+                        .HasColumnType("int");
 
                     b.HasKey("DishId", "IngredientId");
 
@@ -86,11 +82,11 @@ namespace Restaraunt.Migrations
 
             modelBuilder.Entity("Restaraunt.RestarauntSystem.DAL.Entities.Order", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DateOrder")
                         .HasColumnType("datetime2");
@@ -108,17 +104,11 @@ namespace Restaraunt.Migrations
 
             modelBuilder.Entity("Restaraunt.RestarauntSystem.DAL.Entities.OrderDetail", b =>
                 {
-                    b.Property<long>("OrderId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.Property<long>("PortionId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    b.Property<int>("PortionId")
+                        .HasColumnType("int");
 
                     b.HasKey("OrderId", "PortionId");
 
@@ -129,14 +119,14 @@ namespace Restaraunt.Migrations
 
             modelBuilder.Entity("Restaraunt.RestarauntSystem.DAL.Entities.Portion", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<long>("DishId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("DishId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");

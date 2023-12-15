@@ -8,10 +8,6 @@ namespace Restaraunt.RestarauntSystem.DAL.DbContexts.Config
     {
         public void Configure(EntityTypeBuilder<Dish> builder)
         {
-            builder.
-                Property(pr=>pr.Name).HasMaxLength(60);
-            builder.
-                Property(pr => pr.Description).HasMaxLength(256);
             builder
                 .HasMany(h => h.Portions)
                 .WithOne(w => w.Dish)

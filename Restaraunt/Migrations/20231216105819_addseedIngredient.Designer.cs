@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaraunt.RestarauntSystem.DAL.DbContexts;
 
@@ -11,9 +12,10 @@ using Restaraunt.RestarauntSystem.DAL.DbContexts;
 namespace Restaraunt.Migrations
 {
     [DbContext(typeof(RestarauntContext))]
-    partial class RestarauntContexModelSnapshot : ModelSnapshot
+    [Migration("20231216105819_addseedIngredient")]
+    partial class addseedIngredient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,26 +45,6 @@ namespace Restaraunt.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Dishies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Description = "A comforting and hearty dish featuring layers of tender chicken, sliced potatoes, caramelized onions, and a rich garlic-infused cream sauce. Baked until golden and bubbling, this gratin is the epitome of savory indulgence.",
-                            Name = "Chicken and Potato Gratin"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Description = "A light and nutritious dish that combines lean turkey with fresh spinach and creamy avocado. The turkey is seasoned to perfection, and the dish is topped with slices of ripe avocado for a burst of flavor and a touch of indulgence.",
-                            Name = "Turkey with Spinach and Avocado"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Description = "An elegant and flavorful dish featuring succulent baked salmon, accompanied by perfectly roasted potatoes and caramelized onions. The salmon is seasoned with herbs and spices, creating a harmonious blend of textures and tastes.",
-                            Name = "Baked Salmon with Potato and Onion"
-                        });
                 });
 
             modelBuilder.Entity("Restaraunt.RestarauntSystem.DAL.Entities.Ingredient", b =>
@@ -85,48 +67,8 @@ namespace Restaraunt.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
-                            Name = "Cucumber"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Name = "Spinach"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Name = "Salmon"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            Name = "Avocado"
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            Name = "Turkey"
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            Name = "Onion"
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            Name = "Potato"
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            Name = "Garlic"
-                        },
-                        new
-                        {
                             Id = 9L,
-                            Name = "Chiken"
+                            Name = "Cucumber"
                         });
                 });
 

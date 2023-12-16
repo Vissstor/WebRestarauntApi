@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Restaraunt;
 using Restaraunt.RestarauntSystem.DAL.DbContexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<RestarauntContext>(dbContextOptions => dbContextOptions.UseSqlServer("Server=.\\SQLEXPRESS;DataBase=WebRestaraunt.db;Trusted_Connection=True"));
+builder.Services.RegisterRepositories();
+builder.Services.RegisterCustomServices();
+builder.Services.AddAutoMapper();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Restaraunt.RestarauntSystem.DAL.DbContexts;
 using System;
 using System.Linq.Expressions;
 
 namespace Restaraunt.RestarauntSystem.DAL.Repositories
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        DbContext _context;
+        public RestarauntContext _context;
 
-        public GenericRepository(DbContext context)
+        public GenericRepository(RestarauntContext context)
         {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
@@ -26,9 +27,9 @@ namespace Restaraunt.RestarauntSystem.DAL.Repositories
             return await IncludeEntities<TEntity>(_context.Set<TEntity>(), includes).ToListAsync();
         }
         //Отримання першого знайденого обєкта 
-        public async Task<TEntity> GetOneObjectAsync(Expression<Func<TEntity, object>>[] includes)
+        public async Task<TEntity> GetOneObjectAsync(Expression<Func<TEntity, bool>> expression)
         {
-            return await _context.Set<TEntity>().FirstOrDefaultAsync();
+            return await _context.Set<TEntity>().FirstOrDefaultAsync(expression);
         }
         //Отримання всіх обєктів з використання фільтрації  
         public async Task<IEnumerable<TEntity>> GetAfterFilterAsync(Func<TEntity, bool> predicate)
@@ -39,7 +40,7 @@ namespace Restaraunt.RestarauntSystem.DAL.Repositories
         public async Task<IEnumerable<TEntity>> GetAllInformObjectAfterFilterAsync(Func<TEntity, bool> predicate,
             params Expression<Func<TEntity, object>>[] includes)
         {
-            return await IncludeEntities<TEntity>(_context.Set<TEntity>().Where(predicate).AsQueryable(),includes).ToListAsync();
+            return await IncludeEntities<TEntity>(_context.Set<TEntity>(),includes).Where(predicate).AsQueryable().ToListAsync();
         }
         public async Task<TEntity> GetByIdAsync(long id)
         {

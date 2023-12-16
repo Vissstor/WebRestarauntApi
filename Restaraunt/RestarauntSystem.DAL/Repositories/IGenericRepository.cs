@@ -1,12 +1,19 @@
-﻿namespace Restaraunt.RestarauntSystem.DAL.Repositories
+﻿using System.Linq.Expressions;
+
+namespace Restaraunt.RestarauntSystem.DAL.Repositories
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        void Create(TEntity item);
-        TEntity FindById(int id);
-        Task<IEnumerable<TEntity>> GetAllAsync();
-        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
-        void Remove(TEntity item);
-        void Update(TEntity item);
+        Task<IEnumerable<TEntity>> GetAllObjectAsync();
+        Task<IEnumerable<TEntity>> GetAllInformationObjectAsync(params Expression<Func<TEntity, object>>[] includes);
+        Task<TEntity> GetOneObjectAsync(Expression<Func<TEntity, bool>> expression);
+        Task<IEnumerable<TEntity>> GetAfterFilterAsync(Func<TEntity, bool> predicate);
+        Task<IEnumerable<TEntity>> GetAllInformObjectAfterFilterAsync(Func<TEntity, bool> predicate,
+            params Expression<Func<TEntity, object>>[] includes);
+        Task<TEntity> GetByIdAsync(long id);
+        void Delete(TEntity entity);
+        void Create(TEntity entity);
+         Task SaveAsync();
+
     }
 }

@@ -34,6 +34,7 @@ namespace Restaraunt.RestarauntSystem.DAL.DbContexts
                new Dish {Id=3, Name = "Baked Salmon with Potato and Onion" , Description="An elegant and flavorful dish featuring succulent baked salmon, accompanied by perfectly roasted potatoes and caramelized onions. The salmon is seasoned with herbs and spices, creating a harmonious blend of textures and tastes."}
             };
         }
+
        
     }
 }

@@ -17,13 +17,24 @@ namespace RestaurantApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<IngredientDto>>> GetIngredientsAsync()
         {
-            var ingredients = await _ingredientService.GetIngredientsAsync();
-            return Ok(ingredients);
+            try
+            {
+                var ingredients = await _ingredientService.GetIngredientsAsync();
+                return Ok(ingredients);
+            } 
+            catch (Exception ex) { return BadRequest(ex.Message); }
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIngredientAsync(int id)
         {
             await _ingredientService.DeleteIngredient(id);
+            return NoContent();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateIngredienAsync(IngredientCreateDto ingredientDto)
+        {
+            await _ingredientService.CreateIngredient(ingredientDto);
             return NoContent();
         }
     }

@@ -14,7 +14,8 @@ namespace Restaraunt
         public static void RegisterCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IIngredientService, IngredientService>();
-  
+            services.AddScoped<IDishService, DishService>();
+            services.AddScoped<IPortionService, PortionService>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)

@@ -6,5 +6,6 @@ namespace Restaraunt.RestarauntSystem.BLL.Services.Abstract
     {
         Task<IEnumerable<IngredientDto>> GetIngredientsAsync();
         Task DeleteIngredient(long id);
+        Task CreateIngredient(IngredientCreateDto ingredient);
     }
 }

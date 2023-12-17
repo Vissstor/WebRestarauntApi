@@ -28,6 +28,12 @@ namespace Restaraunt.RestarauntSystem.BLL.Services
             await _genericRepository.SaveAsync();
              
         }
+        public async Task CreateIngredient(IngredientCreateDto ingredient)
+        {
+            var ing = _mapper.Map<Ingredient>(ingredient);
+            await _genericRepository.Create(ing);
+            await _genericRepository.SaveAsync();
+        }
 
     }
 }

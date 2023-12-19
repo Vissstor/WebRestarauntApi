@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Restaraunt.RestarauntSystem.BLL.Models.Dish;
-using Restaraunt.RestarauntSystem.BLL.Models.Ingredient;
-using Restaraunt.RestarauntSystem.BLL.Services;
 using Restaraunt.RestarauntSystem.BLL.Services.Abstract;
 
 namespace RestaurantApi.Controllers
@@ -41,10 +39,17 @@ namespace RestaurantApi.Controllers
             await _dishService.CreateDishAsync(dish);
             return NoContent();
         }
+
         [HttpDelete("id")]
         public async Task<IActionResult> DeleteDishAsync(long id)
         {
             await _dishService.DeleteDishAsync(id);
+            return NoContent();
+        }
+        [HttpPut("Id")]
+        public async Task<IActionResult> UpdateDish(long id,UpdateDishDto updateDish)
+        {
+            await _dishService.UpdateDish(id, updateDish);
             return NoContent();
         }
 

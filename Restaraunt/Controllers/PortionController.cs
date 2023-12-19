@@ -26,23 +26,21 @@ namespace RestaurantApi.Controllers
             }
             catch (Exception ex) { return BadRequest(ex.Message); }
         }
-        [HttpGet("properties")]
-        public async Task<ActionResult<IEnumerable<PortionDto>>> GetPortionAfterFilterAsync(int weight,decimal price)
+        [HttpPut("id")]
+        public async Task<IActionResult> UpdatePortion(long id,PortionForDishDto por)
         {
-            try
-            {
-                var ingredients = await _portionService.GetPortionFilterAsync(weight, price);
-                return Ok(ingredients);
-            }
-            catch (Exception ex) { return BadRequest(ex.Message); }
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> CreateIngredienAsync(PortionCreateDto portionCreateDto)
-        {
-            await _portionService.CreatePortion(portionCreateDto);
+            await _portionService.UpdatePortionAsync(id, por);
             return NoContent();
         }
+        //[HttpGet("properties")]
+        //public async Task<ActionResult<IEnumerable<PortionDto>>> GetPortionAfterFilterAsync(int weight,decimal price)
+        //{
+        //    try
+        //    {
+        //        var ingredients = await _portionService.GetPortionFilterAsync(weight, price);
+        //        return Ok(ingredients);
+        //    }
+        //    catch (Exception ex) { return BadRequest(ex.Message); }
+        //}
     }
 }

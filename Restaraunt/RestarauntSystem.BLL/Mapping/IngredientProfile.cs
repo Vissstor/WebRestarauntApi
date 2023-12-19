@@ -8,9 +8,9 @@ namespace Restaraunt.RestarauntSystem.BLL.Mapping
     {
         public IngredientProfile()
         {
-            CreateMap<Ingredient,IngredientDto>();
+            CreateMap<Ingredient, IngredientDto>();
             CreateMap<IngredientCreateDto, Ingredient>();
-            CreateMap<Ingredient,IngredientCreateDto>();
+            CreateMap<Ingredient, IngredientCreateDto>();
         }
     }
 }

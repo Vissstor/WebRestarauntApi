@@ -1,4 +1,5 @@
-﻿using Restaraunt.RestarauntSystem.BLL.Models.Order;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Restaraunt.RestarauntSystem.BLL.Models.Order;
 using Restaraunt.RestarauntSystem.DAL;
 
 namespace Restaraunt.RestarauntSystem.BLL.Services.Abstract
@@ -10,5 +11,6 @@ namespace Restaraunt.RestarauntSystem.BLL.Services.Abstract
         Task<OrderDto> GetOrderByIdAsync(long id);
         Task<IEnumerable<OrderDto>> GetOrderByStatusOrderAsync(StatusOrder statusOrder);
         Task CreateOrderAsync(NewOrderDto newOrder);
+        Task UpdateOrderAsync(long id, UpdateOrderDto orderToUpdate);
     }
 }

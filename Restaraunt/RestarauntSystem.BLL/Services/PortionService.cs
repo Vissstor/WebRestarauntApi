@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using Restaraunt.RestarauntSystem.BLL.Models.Dish;
-using Restaraunt.RestarauntSystem.BLL.Models.Ingredient;
+using Restaraunt.RestarauntSystem.BLL.Models.Order;
 using Restaraunt.RestarauntSystem.BLL.Models.Portion;
 using Restaraunt.RestarauntSystem.BLL.Services.Abstract;
+using Restaraunt.RestarauntSystem.DAL;
 using Restaraunt.RestarauntSystem.DAL.Entities;
 using Restaraunt.RestarauntSystem.DAL.Repositories;
-using System;
 
 namespace Restaraunt.RestarauntSystem.BLL.Services
 {
@@ -23,16 +22,20 @@ namespace Restaraunt.RestarauntSystem.BLL.Services
             var portions = await _genericRepository.GetAllObjectAsync();
             return _mapper.Map<IEnumerable<PortionDto>>(portions);
         }
-        public async Task CreatePortion(PortionCreateDto portion)
+
+        public async Task UpdatePortionAsync(long id, PortionForDishDto orderToUpdate)
         {
-            var por = _mapper.Map<Portion>(portion);
-            _genericRepository.Create(por);
+            var por = await _genericRepository.GetByIdAsync(id)
+                 ?? throw new Exception(" Order id is incorect.");
+            por.Weight = orderToUpdate.Weight;
+            por.Price= orderToUpdate.Price;
+            await _genericRepository.UpdateAsync(por);
             await _genericRepository.SaveAsync();
         }
-        public async Task<IEnumerable<PortionDto>> GetPortionFilterAsync(int weihgt,decimal price)
-        {
-            var portions = await _genericRepository.GetAfterFilterAsync(x => x.Weight == weihgt || x.Price == price);
-            return _mapper.Map<IEnumerable<PortionDto>>(portions);
-        }
+        //public async Task<IEnumerable<PortionDto>> GetPortionFilterAsync(int weihgt, decimal price)
+        //{
+        //    var portions = await _genericRepository.GetAfterFilterAsync(x => x.Weight == weihgt || x.Price == price);
+        //    return _mapper.Map<IEnumerable<PortionDto>>(portions);
+        //}
     }
 }

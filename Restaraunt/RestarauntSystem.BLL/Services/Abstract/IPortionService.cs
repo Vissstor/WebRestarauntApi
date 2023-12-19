@@ -4,8 +4,9 @@ namespace Restaraunt.RestarauntSystem.BLL.Services.Abstract
 {
     public interface IPortionService
     {
-        Task CreatePortion(PortionCreateDto portion);
+
         Task<IEnumerable<PortionDto>> GetAllPortionAsync();
-        Task<IEnumerable<PortionDto>> GetPortionFilterAsync(int weihgt, decimal price);
+        Task UpdatePortionAsync(long id, PortionForDishDto orderToUpdate);
+        //Task<IEnumerable<PortionDto>> GetPortionFilterAsync(int weihgt, decimal price);
     }
 }

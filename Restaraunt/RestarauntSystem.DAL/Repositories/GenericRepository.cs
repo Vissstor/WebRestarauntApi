@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Restaraunt.RestarauntSystem.DAL.DbContexts;
-using Restaraunt.RestarauntSystem.DAL.Entities;
 using System;
 using System.Linq.Expressions;
 
 namespace Restaraunt.RestarauntSystem.DAL.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         public RestarauntContext _context;
 
@@ -37,30 +36,27 @@ namespace Restaraunt.RestarauntSystem.DAL.Repositories
         {
             return await _context.Set<TEntity>().Where(predicate).ToListAsync();
         }
-        //Отриманння всіх обєктів та підключенних до нього таблиць
-        public async Task<IEnumerable<TEntity>> GetAllInformObjectAfterFilterAsync(Func<TEntity, bool> predicate,
-            params Expression<Func<TEntity, object>>[] includes)
-        {
-            return await IncludeEntities(_context.Set<TEntity>(),includes).Where(predicate).AsQueryable().ToListAsync();
-        }
         public async Task<TEntity> GetByIdAsync(long id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }
-        public async Task<TEntity> GetByIdIncludeAsync(long id, params Expression<Func<TEntity, object>>[] includes)
+        public async Task<TEntity> GetByIdIncludeAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
         {
-            return await IncludeEntities(_context.Set<TEntity>(), includes).FirstOrDefaultAsync(x => x.Id == id);
+            return await IncludeEntities(_context.Set<TEntity>(), includes).FirstOrDefaultAsync(predicate);
         }
         public void Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
         }
- 
+
         public async Task Create(TEntity entity)
         {
             await _context.Set<TEntity>().AddAsync(entity);
         }
-
+        public async Task UpdateAsync(TEntity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+        }
         public async Task CreateArange(IEnumerable<TEntity> entity)
         {
             await _context.Set<TEntity>().AddRangeAsync(entity);
@@ -81,6 +77,6 @@ namespace Restaraunt.RestarauntSystem.DAL.Repositories
             return query;
         }
 
-      
+
     }
 }

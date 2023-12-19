@@ -2,8 +2,8 @@
 {
    public enum StatusOrder
     {
-        expectation,
-        fulfilled,
-        cancelled
+        Expected,
+        Completed,
+        Cancelled
     }
 }

@@ -10,6 +10,8 @@ namespace Restaraunt.RestarauntSystem.BLL.Mapping
         {
             CreateMap<PortionCreateDto, Portion>();
             CreateMap<Portion, PortionDto>();
+            CreateMap<Portion, PortionForDishDto>();
         }
     }
 }
+

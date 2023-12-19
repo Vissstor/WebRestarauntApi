@@ -2,7 +2,6 @@
 using Restaraunt.RestarauntSystem.BLL.Mapping;
 using Restaraunt.RestarauntSystem.BLL.Services;
 using Restaraunt.RestarauntSystem.BLL.Services.Abstract;
-using Restaraunt.RestarauntSystem.DAL.Entities;
 using Restaraunt.RestarauntSystem.DAL.Repositories;
 using System.Reflection;
 
@@ -16,6 +15,7 @@ namespace Restaraunt
             services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<IDishService, DishService>();
             services.AddScoped<IPortionService, PortionService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)

@@ -23,7 +23,8 @@ namespace Restaraunt.RestarauntSystem.BLL.Services
 
         public async Task DeleteIngredient(long id)
         {
-            var ingredient = await _genericRepository.GetByIdAsync(id);
+            var ingredient = await _genericRepository.GetByIdAsync(id) 
+                ?? throw new Exception(" Ingredient id is incorect."); ;
             _genericRepository.Delete(ingredient);
             await _genericRepository.SaveAsync();
              

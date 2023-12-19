@@ -9,5 +9,6 @@ namespace Restaraunt.RestarauntSystem.BLL.Services.Abstract
         Task<DishDto> GetDishByIdAsync(long id);
         Task CreateDishAsync(DishCreateDto dish);
         Task DeleteDishAsync(long id);
+        Task UpdateDish(long id, UpdateDishDto dishDto);
     }
 }

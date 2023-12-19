@@ -2,7 +2,7 @@
 
 namespace Restaraunt.RestarauntSystem.DAL.Entities
 {
-    public class OrderDetail : BaseEntity
+    public class OrderDetail
     {
         public Order? Order { get; set; }
         public long OrderId { get; set; }

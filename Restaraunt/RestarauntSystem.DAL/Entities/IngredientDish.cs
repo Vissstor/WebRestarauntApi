@@ -2,7 +2,7 @@
 
 namespace Restaraunt.RestarauntSystem.DAL.Entities
 {
-    public class IngredientDish : BaseEntity
+    public class IngredientDish
     {
 
         public Ingredient? Ingredient { get; set; }

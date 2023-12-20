@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Restaraunt.RestarauntSystem.BLL.Mapping;
-using Restaraunt.RestarauntSystem.BLL.Services;
-using Restaraunt.RestarauntSystem.BLL.Services.Abstract;
-using Restaraunt.RestarauntSystem.DAL.Repositories;
+﻿using RestarauntBLL.Mapping;
+using RestarauntBLL.Services;
+using RestarauntBLL.Services.Abstract;
+using RestarauntDAL.Repositories;
 using System.Reflection;
 
 namespace Restaraunt

@@ -3,7 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaraunt", "Restaraunt\Restaraunt.csproj", "{8592A7AE-37C4-482A-A5C1-D8D5446D02F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaraunt", "Restaraunt\Restaraunt.csproj", "{8592A7AE-37C4-482A-A5C1-D8D5446D02F2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8B13A121-67D4-4E27-B2EE-61653C852A68} = {8B13A121-67D4-4E27-B2EE-61653C852A68}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestarauntDAL", "RestarauntDAL\RestarauntDAL.csproj", "{F29286E3-DC6D-4079-AD72-B51842D912FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestarauntBLL", "RestarauntBLL\RestarauntBLL.csproj", "{8B13A121-67D4-4E27-B2EE-61653C852A68}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F29286E3-DC6D-4079-AD72-B51842D912FF} = {F29286E3-DC6D-4079-AD72-B51842D912FF}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsRestaraunt", "TestsRestarauntBase\TestsRestaraunt.csproj", "{F6C4EC53-3C68-4E2E-8ADC-C9F16506116D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8592A7AE-37C4-482A-A5C1-D8D5446D02F2} = {8592A7AE-37C4-482A-A5C1-D8D5446D02F2}
+		{8B13A121-67D4-4E27-B2EE-61653C852A68} = {8B13A121-67D4-4E27-B2EE-61653C852A68}
+		{F29286E3-DC6D-4079-AD72-B51842D912FF} = {F29286E3-DC6D-4079-AD72-B51842D912FF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +32,18 @@ Global
 		{8592A7AE-37C4-482A-A5C1-D8D5446D02F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8592A7AE-37C4-482A-A5C1-D8D5446D02F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8592A7AE-37C4-482A-A5C1-D8D5446D02F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29286E3-DC6D-4079-AD72-B51842D912FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29286E3-DC6D-4079-AD72-B51842D912FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29286E3-DC6D-4079-AD72-B51842D912FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29286E3-DC6D-4079-AD72-B51842D912FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B13A121-67D4-4E27-B2EE-61653C852A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B13A121-67D4-4E27-B2EE-61653C852A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B13A121-67D4-4E27-B2EE-61653C852A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B13A121-67D4-4E27-B2EE-61653C852A68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C4EC53-3C68-4E2E-8ADC-C9F16506116D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C4EC53-3C68-4E2E-8ADC-C9F16506116D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C4EC53-3C68-4E2E-8ADC-C9F16506116D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C4EC53-3C68-4E2E-8ADC-C9F16506116D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

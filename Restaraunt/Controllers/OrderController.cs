@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.AspNetCore.Mvc;
-using Restaraunt.RestarauntSystem.BLL.Models.Order;
-using Restaraunt.RestarauntSystem.BLL.Services.Abstract;
-using Restaraunt.RestarauntSystem.DAL;
+﻿using Microsoft.AspNetCore.Mvc;
+using RestarauntBLL.Models.Order;
+using RestarauntBLL.Services.Abstract;
+using RestarauntDAL;
 
 namespace RestaurantApi.Controllers
 {

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Restaraunt.RestarauntSystem.BLL.Models.Dish;
-using Restaraunt.RestarauntSystem.BLL.Models.Ingredient;
-using Restaraunt.RestarauntSystem.BLL.Models.Portion;
-using Restaraunt.RestarauntSystem.BLL.Services;
-using Restaraunt.RestarauntSystem.BLL.Services.Abstract;
+using RestarauntBLL.Models.Portion;
+using RestarauntBLL.Services.Abstract;
 
 namespace RestaurantApi.Controllers
 {

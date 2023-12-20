@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\20231213150743_RestarauntDbInitialMigration.cs" />
+    <Compile Include="Migrations\20231213150743_RestarauntDbInitialMigration.Designer.cs" />
+    <Compile Include="Migrations\20231213165910_newInitial.cs" />
+    <Compile Include="Migrations\20231213165910_newInitial.Designer.cs" />
+    <Compile Include="Migrations\20231215120234_newConfig.cs" />
+    <Compile Include="Migrations\20231215120234_newConfig.Designer.cs" />
+    <Compile Include="Migrations\20231215121240_initial.cs" />
+    <Compile Include="Migrations\20231215121240_initial.Designer.cs" />
+    <Compile Include="Migrations\20231215173319_321.cs" />
+    <Compile Include="Migrations\20231215173319_321.Designer.cs" />
+    <Compile Include="Migrations\20231215183839_newInitiak.cs" />
+    <Compile Include="Migrations\20231215183839_newInitiak.Designer.cs" />
+    <Compile Include="Migrations\20231215184544_Seed.cs" />
+    <Compile Include="Migrations\20231215184544_Seed.Designer.cs" />
+    <Compile Include="Migrations\20231215185031_SeedIngredient.cs" />
+    <Compile Include="Migrations\20231215185031_SeedIngredient.Designer.cs" />
+    <Compile Include="Migrations\20231216105819_addseedIngredient.cs" />
+    <Compile Include="Migrations\20231216105819_addseedIngredient.Designer.cs" />
+    <Compile Include="Migrations\20231216112453_SeedIngredientInitial.cs" />
+    <Compile Include="Migrations\20231216112453_SeedIngredientInitial.Designer.cs" />
+    <Compile Include="Migrations\20231216144627_SeedDish.cs" />
+    <Compile Include="Migrations\20231216144627_SeedDish.Designer.cs" />
+    <Compile Include="Migrations\20231217190104_InitialOrder.cs" />
+    <Compile Include="Migrations\20231217190104_InitialOrder.Designer.cs" />
+    <Compile Include="Migrations\20231217190413_InitialDataBase.cs" />
+    <Compile Include="Migrations\20231217190413_InitialDataBase.Designer.cs" />
+    <Compile Include="Migrations\20231217191304_InitialDataBaseNew.cs" />
+    <Compile Include="Migrations\20231217191304_InitialDataBaseNew.Designer.cs" />
+    <Compile Include="Migrations\20231217192044_InitialSeedOrder.cs" />
+    <Compile Include="Migrations\20231217192044_InitialSeedOrder.Designer.cs" />
+    <Compile Include="Migrations\20231217192611_SeedInitial.cs" />
+    <Compile Include="Migrations\20231217192611_SeedInitial.Designer.cs" />
+    <Compile Include="Migrations\20231219070146_1.cs" />
+    <Compile Include="Migrations\20231219070146_1.Designer.cs" />
+    <Compile Include="Migrations\20231219072740_Base2.cs" />
+    <Compile Include="Migrations\20231219072740_Base2.Designer.cs" />
+    <Compile Include="Migrations\20231219113603_newInitialBase.cs" />
+    <Compile Include="Migrations\20231219113603_newInitialBase.Designer.cs" />
+    <Compile Include="Migrations\RestarauntContexModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>

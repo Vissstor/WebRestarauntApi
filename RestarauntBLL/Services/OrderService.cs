@@ -97,8 +97,13 @@ namespace RestarauntBLL.Services
         }
         public async Task UpdateOrderAsync(long id, UpdateOrderDto orderToUpdate)
         {
-            var order = await _orderRepository.GetByIdAsync(id)
-                 ?? throw new Exception(" Order id is incorect.");
+            var order = await _orderRepository.GetByIdAsync(id) ?? throw new Exception("Order id is incorrect.");
+
+            if (!Enum.IsDefined(typeof(StatusOrder), orderToUpdate.StatusOrder))
+            {
+                throw new Exception("Invalid StatusOrder value");
+            }
+
             order.Status = orderToUpdate.StatusOrder;
             await _orderRepository.UpdateAsync(order);
             await _orderRepository.SaveAsync();

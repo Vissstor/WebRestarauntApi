@@ -101,7 +101,7 @@ namespace RestarauntBLL.Services
 
             if (!Enum.IsDefined(typeof(StatusOrder), orderToUpdate.StatusOrder))
             {
-                throw new Exception("Invalid StatusOrder value");
+                throw new Exception("Invalid StatusOrder value.");
             }
 
             order.Status = orderToUpdate.StatusOrder;

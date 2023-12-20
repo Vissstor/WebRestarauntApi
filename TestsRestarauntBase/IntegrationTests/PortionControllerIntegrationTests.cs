@@ -68,7 +68,6 @@ namespace TestsRestaraunt.IntegrationTests
             long idToUpdate = 1;
             var portionToUpdate = new PortionForDishDto { Weight = 300, Price = 15.99m };
 
-            // Assuming there is an existing portion in the database
             var existingPortion = new Portion { Id = idToUpdate, Weight = 200, Price = 10.99m };
             await context.Portions.AddAsync(existingPortion);
             await context.SaveChangesAsync();

@@ -4,8 +4,6 @@ using RestarauntBLL.Services.Abstract;
 using RestarauntBLL.Services;
 using RestarauntDAL.Entities;
 using RestarauntDAL.Repositories;
-using RestarauntBLL.Models.Portion;
-using RestarauntBLL.Models.Dish;
 using RestarauntBLL.Models.Ingredient;
 
 namespace TestsRestaraunt.BLLServices

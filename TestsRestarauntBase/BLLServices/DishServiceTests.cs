@@ -6,12 +6,7 @@ using RestarauntBLL.Services;
 using RestarauntBLL.Services.Abstract;
 using RestarauntDAL.Entities;
 using RestarauntDAL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsRestaraunt.BLLServices
 {
@@ -86,7 +81,6 @@ namespace TestsRestaraunt.BLLServices
             var dishId = 1;
             var dish = new Dish { Id = dishId };
 
-            // Mock repository setup
             _mockDishRepository.Setup(r => r.GetByIdAsync(dishId)).ReturnsAsync(dish);
             _mockDishRepository.Setup(setup => setup.Delete(It.IsAny<Dish>())).Verifiable();
             _mockDishRepository.Setup(setup => setup.SaveAsync()).Returns(Task.CompletedTask).Verifiable();

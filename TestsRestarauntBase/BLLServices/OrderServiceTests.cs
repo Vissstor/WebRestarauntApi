@@ -59,24 +59,24 @@ namespace TestsRestaraunt.BLLServices
             // Arrange
             var newOrderDto = new NewOrderDto
             {
-                // Set your properties accordingly for testing
+                PortionsId = new List<long> { 1, 2, 3 },
+                TableNumber = 42 
             };
 
-            // Mock repository setup
-            _mockOrderRepository.Setup(setup => setup.Create(It.IsAny<Order>())).Verifiable();
-            _mockOrderRepository.Setup(setup => setup.SaveAsync()).Returns(Task.CompletedTask).Verifiable();
-            _mockOrderDetailRepository.Setup(setup => setup.CreateArange(It.IsAny<IEnumerable<OrderDetail>>())).Verifiable();
-            _mockOrderDetailRepository.Setup(setup => setup.SaveAsync()).Returns(Task.CompletedTask).Verifiable();
             _mockMapper.Setup(m => m.Map<Order>(It.IsAny<NewOrderDto>())).Returns(new Order());
+            _mockOrderRepository.Setup(repo => repo.Create(It.IsAny<Order>())).Verifiable();
+            _mockOrderRepository.Setup(setup => setup.SaveAsync()).Returns(Task.CompletedTask).Verifiable();
+            _mockOrderDetailRepository.Setup(repo => repo.CreateArange(It.IsAny<IEnumerable<OrderDetail>>())).Verifiable();
+            _mockOrderDetailRepository.Setup(setup => setup.SaveAsync()).Returns(Task.CompletedTask).Verifiable();
 
             // Act
             await _orderService.CreateOrderAsync(newOrderDto);
 
             // Assert
+            // Підтвердження очікуваних викликів
             _mockOrderRepository.Verify();
             _mockOrderDetailRepository.Verify();
         }
-
         [Fact]
         public async Task UpdateOrderAsync_ShouldUpdateOrder()
         {

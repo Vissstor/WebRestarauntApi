@@ -8,7 +8,7 @@ namespace RestarauntBLL.Mapping
     {
         public PortionProfilem()
         {
-            CreateMap<PortionCreateDto, Portion>();
+            CreateMap<PortionForDishDto, Portion>();
             CreateMap<Portion, PortionDto>();
             CreateMap<Portion, PortionForDishDto>();
         }

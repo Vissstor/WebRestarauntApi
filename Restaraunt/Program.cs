@@ -1,6 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Restaraunt;
 using Restaraunt.RestarauntSystem.DAL.DbContexts;
+using RestarauntBLL.Services.Abstract;
+using RestarauntBLL.Services;
+using RestarauntDAL.Repositories;
+using RestarauntBLL.Mapping;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +17,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<RestarauntContext>(dbContextOptions => dbContextOptions.UseSqlServer("Server=.\\SQLEXPRESS;DataBase=WebRestaraunt.db;Trusted_Connection=True"));
-builder.Services.RegisterRepositories();
-builder.Services.RegisterCustomServices();
-builder.Services.AddAutoMapper();
-
+builder.Services.AddScoped<IIngredientService, IngredientService>();
+builder.Services.AddScoped<IDishService, DishService>();
+builder.Services.AddScoped<IPortionService, PortionService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(IngredientProfile)));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,3 +39,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

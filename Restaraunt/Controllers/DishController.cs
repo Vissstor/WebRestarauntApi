@@ -40,16 +40,10 @@ namespace RestaurantApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDishAsync(long id)
         {
             await _dishService.DeleteDishAsync(id);
-            return NoContent();
-        }
-        [HttpPut("Id")]
-        public async Task<IActionResult> UpdateDish(long id,UpdateDishDto updateDish)
-        {
-            await _dishService.UpdateDish(id, updateDish);
             return NoContent();
         }
 

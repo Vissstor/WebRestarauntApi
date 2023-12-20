@@ -29,26 +29,7 @@ namespace TestsRestaraunt.BLLServices
             _mockIngredientDishRepository = new Mock<IGenericRepository<IngredientDish>>();
             _mockPortionRepository = new Mock<IGenericRepository<Portion>>();
             _mockMapper = new Mock<IMapper>();
-            //_mockMapper.Setup(m => m.Map<DishDto>(It.IsAny<Dish>()))
-            //    .Returns((Dish sourceDish) =>
-            //    {
-
-            //        var mappedDto = new DishDto
-            //        {
-            //            Id = sourceDish.Id,
-            //            Name = sourceDish.Name,
-            //            Description = sourceDish.Description,
-            //            Portions = sourceDish.Portions.Select(p => new PortionForDishDto
-            //            {
-            //                Weight = p.Weight,
-            //                Price = p.Price
-                           
-            //            }).ToList(),
-            //            IngredientsId = sourceDish.IngredientsDishes.Select(i => i.IngredientId).ToList()
-
-            //        };
-            //    return mappedDto;
-            //    });
+    
 
             _dishService = new DishService(
                 _mockDishRepository.Object,
@@ -117,28 +98,6 @@ namespace TestsRestaraunt.BLLServices
             _mockDishRepository.Verify();
         }
 
-        [Fact]
-        public async Task UpdateDish_ShouldUpdateDish()
-        {
-            // Arrange
-            var dishId = 1;
-            var dishDto = new UpdateDishDto 
-            {
-                Name="Name test",
-                Description="Вуі"
-            };
-            var dish = new Dish { Id = dishId };
-
-            _mockDishRepository.Setup(setup => setup.GetByIdAsync(dishId)).ReturnsAsync(dish);
-            _mockDishRepository.Setup(setup => setup.UpdateAsync(It.IsAny<Dish>())).Verifiable();
-            _mockDishRepository.Setup(setup => setup.SaveAsync()).Returns(Task.CompletedTask).Verifiable();
-
-            // Act
-            await _dishService.UpdateDish(dishId, dishDto);
-
-            // Assert
-            _mockDishRepository.Verify();
-        }
         public static List<Dish> GetDishies()
         {
             return new List<Dish>

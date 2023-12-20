@@ -25,7 +25,7 @@ namespace RestaurantApi.Controllers
             catch (Exception ex) { return BadRequest(ex.Message); }
         }
 
-        [HttpGet("status")]
+        [HttpGet("bystatus/{status}")]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrderByNumberTable(StatusOrder status)
         {
             try
@@ -41,7 +41,7 @@ namespace RestaurantApi.Controllers
             await _orderService.CreateOrderAsync(order);
             return NoContent();
         }
-        [HttpGet("Id")]
+        [HttpGet("{Id}")]
         public async Task<ActionResult<OrderDto>> GetOrderById(long id)
         {
             try
@@ -51,14 +51,14 @@ namespace RestaurantApi.Controllers
             }
             catch (Exception ex) { return BadRequest(ex.Message); }
         }
-        [HttpDelete("Id")]
+        [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteOrder(long id)
         {
             await _orderService.DeleteOrderAsync(id);
             return NoContent();
         }
 
-        [HttpPut("Id")]
+        [HttpPut("(Id)")]
 
         public async Task<IActionResult> UpdateOrderStatus(long id,UpdateOrderDto updateOrderDto)
         {

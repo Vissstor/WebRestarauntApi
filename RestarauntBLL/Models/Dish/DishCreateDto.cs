@@ -7,7 +7,7 @@ namespace RestarauntBLL.Models.Dish
         public string Name { get; set; }
         public string Description { get; set; }
         public ICollection<long> IngredientsId { get; set; }
-        public ICollection<PortionCreateDto> Portions { get; set; }
+        public ICollection<PortionForDishDto> Portions { get; set; }
     }
 }
 

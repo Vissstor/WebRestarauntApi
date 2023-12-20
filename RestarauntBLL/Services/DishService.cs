@@ -72,14 +72,6 @@ namespace RestarauntBLL.Services
             _dishRepository.Delete(dishEntity);
             await _dishRepository.SaveAsync();
         }
-        public async Task UpdateDish(long id, UpdateDishDto dishDto)
-        {
-            var dish = await _dishRepository.GetByIdAsync(id)
-                ?? throw new Exception("Incorect dish id.");
-            dish.Description = dishDto.Description;
-            dish.Name = dishDto.Name;
-            await _dishRepository.UpdateAsync(dish);
-            await _dishRepository.SaveAsync();
-        }
+      
     }
 }

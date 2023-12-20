@@ -11,7 +11,6 @@ namespace RestarauntBLL.Mapping
             CreateMap<Order, OrderDto>()
                             .ForMember(dest => dest.PortionsDto, opt => opt.MapFrom(src => src.OrdersDetail.Select(ing => ing.PortionId)));
             CreateMap<Order, UpdateOrderDto>();
-
         }
     }
 

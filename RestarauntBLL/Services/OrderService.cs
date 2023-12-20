@@ -60,13 +60,16 @@ namespace RestarauntBLL.Services
 
             await _orderRepository.Create(order);
             await _orderRepository.SaveAsync();
+            var orderDetails = newOrder.PortionsId
+                   .Select(dto => new OrderDetail
+                   {
+                     OrderId = order.Id,
+                     PortionId = dto,
+        
+                   })
+                    .ToList();
 
-            var orderDetail = _mapper.Map<IEnumerable<OrderDetail>>(newOrder.OrderDetailDto);
-            foreach (var item in orderDetail)
-            {
-                item.OrderId = order.Id;
-            }
-            await _orderDetailRepository.CreateArange(orderDetail);
+            await _orderDetailRepository.CreateArange(orderDetails);
             await _orderDetailRepository.SaveAsync();
         }
         public async Task<IEnumerable<OrderDto>> GetOrderByStatusOrderAsync(StatusOrder statusOrder)

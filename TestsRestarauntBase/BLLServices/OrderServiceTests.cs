@@ -5,11 +5,6 @@ using RestarauntBLL.Services.Abstract;
 using RestarauntBLL.Services;
 using RestarauntDAL.Entities;
 using RestarauntDAL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 using RestarauntDAL;
 
@@ -34,7 +29,25 @@ namespace TestsRestaraunt.BLLServices
             _orderService = new OrderService(_mockOrderRepository.Object, _mockMapper.Object,
              _mockOrderDetailRepository.Object,_mockPortionRepository.Object);
         }
-        
+        [Fact]
+        public async Task GetAllOrderAsync_ShouldReturnOrderDtos()
+        {
+            // Arrange
+            var orders = GetOrders();
+            var orderDtos = _mockMapper.Object.Map<IEnumerable<OrderDto>>(orders);
+
+            _mockOrderRepository.Setup(setup => setup.GetAllInformationObjectAsync(It.IsAny<Expression<Func<Order, object>>>()))
+                .ReturnsAsync(orders);
+
+            // Act
+            var result = await _orderService.GetAllOrderAsync();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<IEnumerable<OrderDto>>(result);
+            Assert.Equal(orderDtos, result);
+        }
+
         [Fact]
         public async Task DeleteOrderAsync_ShouldDeleteOrder()
         {
@@ -73,7 +86,6 @@ namespace TestsRestaraunt.BLLServices
             await _orderService.CreateOrderAsync(newOrderDto);
 
             // Assert
-            // Підтвердження очікуваних викликів
             _mockOrderRepository.Verify();
             _mockOrderDetailRepository.Verify();
         }
@@ -84,7 +96,7 @@ namespace TestsRestaraunt.BLLServices
             var orderId = 1;
             var updateOrderDto = new UpdateOrderDto
             {
-                // Set your properties accordingly for testing
+               
             };
             var order = new Order { Id = orderId };
 
@@ -98,25 +110,7 @@ namespace TestsRestaraunt.BLLServices
             // Assert
             _mockOrderRepository.Verify();
         }
-        [Fact]
-        public async Task GetAllOrderAsync_ShouldReturnOrderDtos()
-        {
-            // Arrange
-            var orders = GetOrders();
-            var orderDtos = _mockMapper.Object.Map<IEnumerable<OrderDto>>(orders);
-
-            _mockOrderRepository.Setup(setup => setup.GetAllInformationObjectAsync(It.IsAny<Expression<Func<Order, object>>>()))
-                .ReturnsAsync(orders);
-
-            // Act
-            var result = await _orderService.GetAllOrderAsync();
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.IsAssignableFrom<IEnumerable<OrderDto>>(result);
-            Assert.Equal(orderDtos, result);
-        }
-
+       
         [Fact]
         public async Task GetOrderByStatusOrderAsync_ShouldReturnOrderDtos()
         {
@@ -136,8 +130,6 @@ namespace TestsRestaraunt.BLLServices
             Assert.IsAssignableFrom<IEnumerable<OrderDto>>(result);
             Assert.Equal(orderDtos, result);
         }
-
-        // ... (existing code)
 
         public static List<Order> GetOrders()
         {

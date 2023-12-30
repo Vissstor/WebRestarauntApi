@@ -16,13 +16,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<RestarauntContext>(dbContextOptions => dbContextOptions.UseSqlServer("Server=.\\SQLEXPRESS;DataBase=WebRestaraunt.db;Trusted_Connection=True"));
-builder.Services.AddScoped<IIngredientService, IngredientService>();
-builder.Services.AddScoped<IDishService, DishService>();
-builder.Services.AddScoped<IPortionService, PortionService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(IngredientProfile)));
+builder.Services.AddRestaurantDbContext(builder.Configuration);
+builder.Services.RegisterRepositories();
+builder.Services.RegisterServices();
+builder.Services.AddAutoMapper();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

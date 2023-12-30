@@ -8,7 +8,6 @@ namespace RestarauntBLL.Models.Order
         public List<long> PortionsId { get; set; }
         public int TableNumber { get; set; }
 
-
     }
 }
 

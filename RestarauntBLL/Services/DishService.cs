@@ -3,6 +3,7 @@ using RestarauntBLL.Models.Dish;
 using RestarauntBLL.Services.Abstract;
 using RestarauntDAL.Entities;
 using RestarauntDAL.Repositories;
+using RestarauntDAL.Specifications;
 
 namespace RestarauntBLL.Services
 {
@@ -26,14 +27,14 @@ namespace RestarauntBLL.Services
 
         public async Task<IEnumerable<DishDto>> GetAllDishiesAsync()
         {
-            var dishEntities = await _dishRepository.GetAllInformationObjectAsync(x => x.IngredientsDishes, x => x.Portions);
+            var dishEntities = await _dishRepository.GetObjectAsync(new DishIncludeSpecification());
 
             return _mapper.Map<IEnumerable<DishDto>>(dishEntities);
         }
 
         public async Task<DishDto> GetDishByIdAsync(long id)
         {
-            var dis = await _dishRepository.GetByIdIncludeAsync(x => x.Id == id, x => x.Portions, x => x.IngredientsDishes)
+            var dis = await _dishRepository.GetByIdIncludeAsync(new DishByIdSpecification(id))
                 ?? throw new Exception(" Dish id is incorect.");
             return _mapper.Map<DishDto>(dis);
         }

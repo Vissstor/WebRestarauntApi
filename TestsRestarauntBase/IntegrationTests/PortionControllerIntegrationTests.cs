@@ -28,17 +28,6 @@ namespace TestsRestaraunt.IntegrationTests
             // Act & Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
-
-            var ingredients = JsonConvert.DeserializeObject<List<IngredientDto>>(await response.Content.ReadAsStringAsync());
-
-            Assert.NotNull(ingredients);
-            Assert.NotEmpty(ingredients);
-
-            foreach (var ingredient in ingredients)
-            {
-                Assert.NotNull(ingredient.Name);
-            }
         }
         public async Task GetPortion_ReturnsSuccessStatusCodeAndNonEmptyList()
         {

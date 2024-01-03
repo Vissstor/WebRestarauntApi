@@ -4,6 +4,7 @@ using RestarauntBLL.Services.Abstract;
 using RestarauntDAL;
 using RestarauntDAL.Entities;
 using RestarauntDAL.Repositories;
+using RestarauntDAL.Specifications;
 
 namespace RestarauntBLL.Services
 {
@@ -24,7 +25,7 @@ namespace RestarauntBLL.Services
         }
         public async Task<IEnumerable<OrderDto>> GetAllOrderAsync()
         {
-            var orderEntities = await _orderRepository.GetAllInformationObjectAsync(x => x.OrdersDetail);
+            var orderEntities = await _orderRepository.GetObjectAsync(new OrderIncludeSpecification());
             var order = _mapper.Map<IEnumerable<OrderDto>>(orderEntities);
             foreach (var item in order)
             {
@@ -74,13 +75,13 @@ namespace RestarauntBLL.Services
         }
         public async Task<IEnumerable<OrderDto>> GetOrderByStatusOrderAsync(StatusOrder statusOrder)
         {
-            return _mapper.Map<IEnumerable<OrderDto>>(await _orderRepository.GetAfterFilterAsync(x => x.Status == statusOrder));
+            return _mapper.Map<IEnumerable<OrderDto>>(await _orderRepository.GetObjectAsync(new OrderFilterSpecification(statusOrder)));
 
         }
 
         public async Task<OrderDto> GetOrderByIdAsync(long id)
         {
-            var order = await _orderRepository.GetByIdIncludeAsync(x => x.Id == id, x => x.OrdersDetail)
+            var order = await _orderRepository.GetObjectAsync(new OrderIncludeSpecification())
                  ?? throw new Exception(" Order id is incorect.");
 
             var orderDto = _mapper.Map<OrderDto>(order);

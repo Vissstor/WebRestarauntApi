@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RestarauntDAL.Entities;
 using RestarauntDAL.Repositories;
+using RestarauntDAL.Specifications;
 using System.Linq.Expressions;
 
 using TestsRestaraunt;
@@ -32,39 +33,14 @@ namespace TestsRestarauntBase
                 .ToList();
 
             // Act
-            var dishWithIngredients = await repository.GetAllInformationObjectAsync(d => d.IngredientsDishes);
+            var dishWithIngredients = await repository.GetObjectAsync(new DishIncludeSpecification());
 
             // Assert
             Assert.Equal(dishWithIngredientsContext, dishWithIngredients);
         }
 
-        [Fact]
-        public async Task GetOneObject_ShouldReturnOneObject()
-        {
-            // Arrange
-            Expression<Func<Dish, bool>> predicate = x => x.Name == "Dish Test";
-            var dishContext = context.Dishies.FirstOrDefault(predicate);
 
-            // Act
-            var dish = await repository.GetOneObjectAsync(predicate);
-
-            // Assert
-            Assert.Equal(dishContext, dish);
-        }
-
-        [Fact]
-        public async Task GetAfterFilter_ShouldReturnFilteredObjects()
-        {
-            // Arrange
-            Expression<Func<Dish, bool>> predicate = x => x.Description == "Main Course";
-            var dishesContext = context.Dishies.Where(predicate).ToList();
-
-            // Act
-            var dishes = await repository.GetAfterFilterAsync(predicate);
-
-            // Assert
-            Assert.Equal(dishesContext, dishes);
-        }
+ 
         [Fact]
         public async Task GetByIdAsync_ShouldReturnCorrectObject()
         {
@@ -89,7 +65,7 @@ namespace TestsRestarauntBase
             await repository.SaveAsync();
 
             // Act
-            var resultDish = await repository.GetByIdIncludeAsync(x => x.Id == testDish.Id, d => d.Portions);
+            var resultDish = await repository.GetByIdIncludeAsync(new DishByIdSpecification(1));
 
             // Assert
             Assert.Equal(testDish, resultDish);

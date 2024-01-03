@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Restaraunt.RestarauntSystem.DAL.DbContexts;
+using RestarauntDAL.Entities;
+using RestarauntDAL.Specifications;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace RestarauntDAL.Repositories
@@ -14,33 +17,24 @@ namespace RestarauntDAL.Repositories
                 throw new ArgumentNullException(nameof(context));
             _context = context;
         }
-        //Отримання всіх обєктів
+
         public async Task<IEnumerable<TEntity>> GetAllObjectAsync()
         {
             return await _context.Set<TEntity>().ToListAsync();
-        }
-        //Отримання всіх обєктів з підключенням інших таблиць
-        public async Task<IEnumerable<TEntity>> GetAllInformationObjectAsync(params Expression<Func<TEntity, object>>[] includes)
-        {
-            return await IncludeEntities(_context.Set<TEntity>(), includes).ToListAsync();
-        }
-        //Отримання першого знайденого обєкта 
-        public async Task<TEntity> GetOneObjectAsync(Expression<Func<TEntity, bool>> expression)
-        {
-            return await _context.Set<TEntity>().FirstOrDefaultAsync(expression);
-        }
-        //Отримання всіх обєктів з використання фільтрації  
-        public async Task<IEnumerable<TEntity>> GetAfterFilterAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _context.Set<TEntity>().Where(predicate).ToListAsync();
         }
         public async Task<TEntity> GetByIdAsync(long id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }
-        public async Task<TEntity> GetByIdIncludeAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
+
+        public async Task<IEnumerable<TEntity>> GetObjectAsync(Specification<TEntity> specification)
         {
-            return await IncludeEntities(_context.Set<TEntity>(), includes).FirstOrDefaultAsync(predicate);
+            return await Specification(_context.Set<TEntity>(), specification).ToListAsync();
+        }
+        
+        public async Task<TEntity> GetByIdIncludeAsync(Specification<TEntity> specification)
+        {
+            return await Specification(_context.Set<TEntity>(), specification).FirstOrDefaultAsync();
         }
         public void Delete(TEntity entity)
         {
@@ -64,17 +58,34 @@ namespace RestarauntDAL.Repositories
         {
             await _context.SaveChangesAsync();
         }
-        private static IQueryable<TEntity> IncludeEntities(IQueryable<TEntity> query,
-     params Expression<Func<TEntity, object>>[] includes)
+    
+        protected IQueryable<TEntity> Specification(IQueryable<TEntity> queryable,Specification<TEntity> specification)
         {
-            foreach (var include in includes)
+            if (specification == null)
             {
-                query = query.Include(include);
+                throw new ArgumentNullException(nameof(specification));
             }
 
-            return query;
-        }
+            if (queryable == null)
+            {
+                throw new ArgumentNullException(nameof(queryable));
+            }
 
+            if (specification.CustomCondition != null)
+            {
+                queryable = queryable.Where(specification.CustomCondition);
+            }
+
+            if (specification.CustomIncludes != null)
+            {
+                foreach (var includeExpression in specification.CustomIncludes)
+                {
+                    queryable = queryable.Include(includeExpression);
+                }
+            }
+
+            return queryable;
+        }
 
     }
 }

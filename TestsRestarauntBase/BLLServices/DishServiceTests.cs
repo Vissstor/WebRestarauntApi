@@ -5,6 +5,7 @@ using RestarauntBLL.Services;
 using RestarauntBLL.Services.Abstract;
 using RestarauntDAL.Entities;
 using RestarauntDAL.Repositories;
+using RestarauntDAL.Specifications;
 using System.Linq.Expressions;
 
 namespace TestsRestaraunt.BLLServices
@@ -39,7 +40,9 @@ namespace TestsRestaraunt.BLLServices
             var dishes = GetDishies();
             var dishDtos = _mockMapper.Object.Map<IEnumerable<DishDto>>(dishes);
 
-            _mockDishRepository.Setup(setup => setup.GetAllInformationObjectAsync(It.IsAny<Expression<Func<Dish, object>>[]>()))
+            var dishSpecification = new DishIncludeSpecification();  // Assuming you have a specification for Dish
+
+            _mockDishRepository.Setup(setup => setup.GetObjectAsync(dishSpecification))
                 .ReturnsAsync(dishes);
             _mockMapper.Setup(setup => setup.Map<IEnumerable<DishDto>>(It.IsAny<IEnumerable<Dish>>())).Returns(dishDtos);
 
@@ -56,22 +59,27 @@ namespace TestsRestaraunt.BLLServices
         [Fact]
         public async Task GetDishByIdAsync_ShouldReturnDishDto()
         {
+            // Arrange
             var dishId = 1;
             var dish = new Dish { Id = dishId };
             var dishDto = new DishDto { Id = dishId };
-            _mockDishRepository.Setup(r => r.GetByIdIncludeAsync(It.IsAny<Expression<Func<Dish, bool>>>(),
-                It.IsAny<Expression<Func<Dish, object>>[]>()))
-                .ReturnsAsync(dish);
+
+            var dishSpecification = new DishByIdSpecification(dishId);
+
+            _mockDishRepository.Setup(r => r.GetByIdIncludeAsync(It.Is<DishByIdSpecification>(s => s.CustomCondition != null)))
+               .ReturnsAsync(dish);
             _mockMapper.Setup(m => m.Map<DishDto>(dish)).Returns(dishDto);
 
+            // Act
             var result = await _dishService.GetDishByIdAsync(dishId);
 
+            // Assert
             Assert.NotNull(result);
             Assert.IsType<DishDto>(result);
             Assert.Equal(dishDto, result);
         }
 
-        
+
 
         [Fact]
         public async Task DeleteDishAsync_ShouldDeleteDish()

@@ -7,6 +7,7 @@ using RestarauntDAL.Entities;
 using RestarauntDAL.Repositories;
 using System.Linq.Expressions;
 using RestarauntDAL;
+using RestarauntDAL.Specifications;
 
 namespace TestsRestaraunt.BLLServices
 {
@@ -36,7 +37,9 @@ namespace TestsRestaraunt.BLLServices
             var orders = GetOrders();
             var orderDtos = _mockMapper.Object.Map<IEnumerable<OrderDto>>(orders);
 
-            _mockOrderRepository.Setup(setup => setup.GetAllInformationObjectAsync(It.IsAny<Expression<Func<Order, object>>>()))
+            var orderSpecification = new OrderIncludeSpecification();
+
+            _mockOrderRepository.Setup(setup => setup.GetObjectAsync(orderSpecification))
                 .ReturnsAsync(orders);
 
             // Act
@@ -47,6 +50,7 @@ namespace TestsRestaraunt.BLLServices
             Assert.IsAssignableFrom<IEnumerable<OrderDto>>(result);
             Assert.Equal(orderDtos, result);
         }
+
 
         [Fact]
         public async Task DeleteOrderAsync_ShouldDeleteOrder()
@@ -119,7 +123,9 @@ namespace TestsRestaraunt.BLLServices
             var orders = GetOrders().Where(o => o.Status == statusOrder);
             var orderDtos = _mockMapper.Object.Map<IEnumerable<OrderDto>>(orders);
 
-            _mockOrderRepository.Setup(setup => setup.GetAfterFilterAsync(It.IsAny<Expression<Func<Order, bool>>>()))
+            var orderSpecification = new OrderFilterSpecification(statusOrder); 
+
+            _mockOrderRepository.Setup(setup => setup.GetObjectAsync(orderSpecification))
                 .ReturnsAsync(orders);
 
             // Act
